@@ -18,10 +18,18 @@
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  --accentColor: #c2a4ff;
+  --accentColor: #ff0033;
+  --accentColorRGB: 255, 0, 51;
   --backgroundColor: #0b080c;
   --vh: 100vh;
   --vh: 100svh;
+}
+
+.glow-red {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(var(--accentColorRGB), 0.8), 0 0 20px rgba(var(--accentColorRGB), 0.5),
+    0 0 30px rgba(var(--accentColorRGB), 0.3);
+  filter: drop-shadow(0 0 10px rgba(var(--accentColorRGB), 0.6));
 }
 h1,
 h2,
@@ -97,7 +105,7 @@ body {
   height: var(--vh);
   margin: auto;
   margin-top: 50px;
-  margin-bottom: -100px;
+  margin-bottom: 0px;
 }
 
 .techstack h2 {

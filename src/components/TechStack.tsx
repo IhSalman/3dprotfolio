@@ -129,24 +129,17 @@ const TechStack = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const threshold = document
-        .getElementById("work")!
-        .getBoundingClientRect().top;
-      setIsActive(scrollY > threshold);
+      const techSection = document.querySelector(".techstack");
+      if (!techSection) return;
+
+      const rect = techSection.getBoundingClientRect();
+      const triggerPoint = window.innerHeight * 0.8;
+      setIsActive(rect.top < triggerPoint);
     };
-    document.querySelectorAll(".header a").forEach((elem) => {
-      const element = elem as HTMLAnchorElement;
-      element.addEventListener("click", () => {
-        const interval = setInterval(() => {
-          handleScroll();
-        }, 10);
-        setTimeout(() => {
-          clearInterval(interval);
-        }, 1000);
-      });
-    });
+
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial check
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };

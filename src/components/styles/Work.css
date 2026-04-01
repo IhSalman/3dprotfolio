@@ -11,6 +11,9 @@
   height: 100vh;
   box-sizing: border-box;
   will-change: transform;
+  position: relative;
+  z-index: 10;
+  background-color: var(--backgroundColor);
 }
 .work-container {
   margin: auto;
@@ -165,7 +168,8 @@
     font-size: 50px;
   }
 }
-@media only screen and (max-width: 1400px) {
+
+@media only screen and (max-width: 1024px) {
   .work-box {
     width: 350px;
     padding: 30px;

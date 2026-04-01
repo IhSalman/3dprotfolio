@@ -6,9 +6,13 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quis
-          dolores numquam iusto Ratione earum ducimus autem id iure pariatur
-          dolorum quae maiores.
+          Hello, I am Ismail Habib Salman, currently in my Final year of a
+          Bachelor’s degree at Savonia University of Applied Sciences,
+          specializing in Internet of Things (IoT) in Kuopio,Finland. I am
+          passionate about creating real-world digital solutions that solve
+          problems,enhance productivity, and help business to grow. My goal is
+          to combine web development expertise with emerging AI automation
+          skills to deliver scalable and high-impact solutions.
         </p>
       </div>
     </div>
