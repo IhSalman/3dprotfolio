@@ -15,9 +15,15 @@ const Work = () => {
       if (!container) return;
 
       const getScrollAmount = () => {
-        // Calculate the exact amount needed to scroll to the end
-        const scrollWidth = container.scrollWidth;
-        return scrollWidth - window.innerWidth;
+        const boxes = document.querySelectorAll(".work-box");
+        if (!boxes.length) return 0;
+        
+        // Find width of a single box and multiply by total amount of boxes
+        const boxWidth = (boxes[0] as HTMLElement).offsetWidth;
+        const totalContentWidth = boxWidth * boxes.length;
+        
+        // Subtract screen width, then add padding-right (120px) + margin-left (80px) offsets
+        return totalContentWidth - window.innerWidth + 200;
       };
 
       const timeline = gsap.timeline({
