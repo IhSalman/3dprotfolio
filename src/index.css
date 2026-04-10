@@ -1,14 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 
 :root {
-  font-family: "Geist", sans-serif;
+  font-family: "Geist", "Inter", -apple-system, sans-serif;
 
   font-optical-sizing: auto;
   font-style: normal;
-  line-height: 1.5;
+  line-height: 1.6;
   scroll-behavior: smooth;
   color-scheme: light dark;
-  color: #eae5ec;
+  color: #f8fafc;
   background-color: var(--backgroundColor);
 
   font-synthesis: none;
@@ -18,9 +18,9 @@
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  --accentColor: #ff0033;
-  --accentColorRGB: 255, 0, 51;
-  --backgroundColor: #0b080c;
+  --accentColor: #00e5ff;
+  --accentColorRGB: 0, 229, 255;
+  --backgroundColor: #050505;
   --vh: 100vh;
   --vh: 100svh;
 }
@@ -37,7 +37,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Geist", sans-serif;
+  font-family: "Geist", "Inter", -apple-system, sans-serif;
+  letter-spacing: -0.02em;
 }
 body {
   overflow: hidden;
