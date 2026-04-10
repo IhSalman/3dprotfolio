@@ -8,53 +8,55 @@ gsap.registerPlugin(useGSAP);
 
 const Work = () => {
   useGSAP(() => {
-    const section = document.querySelector(".work-section");
-    const container = document.querySelector(".work-flex");
-    if (!section || !container) return;
+    const mm = gsap.matchMedia();
 
-    // The amount of horizontal scroll is the total width of the content 
-    // minus the width of the visible section.
-    const getScrollAmount = () => {
-      const boxes = document.querySelectorAll(".work-box");
-      const container = document.querySelector(".work-flex");
-      if (!boxes.length || !container) return 0;
+    mm.add("(min-width: 1025px)", () => {
+      const container = document.querySelector(".work-flex") as HTMLElement;
+      if (!container) return;
 
-      // Use the width of the first box as a template for all boxes
-      const boxWidth = (boxes[0] as HTMLElement).offsetWidth || 600;
-      const totalWidth = boxWidth * boxes.length;
-      const viewPortWidth = window.innerWidth;
+      const getScrollAmount = () => {
+        // Calculate the exact amount needed to scroll to the end
+        const scrollWidth = container.scrollWidth;
+        return scrollWidth - window.innerWidth;
+      };
 
-      // The total distance is the content width minus the part already visible
-      // plus some padding to ensure the last card is fully on screen
-      return totalWidth - viewPortWidth + (viewPortWidth * 0.2);
-    };
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".work-section",
+          start: "top top",
+          end: () => `+=${getScrollAmount()}`,
+          scrub: 1,
+          pin: true,
+          id: "work",
+          invalidateOnRefresh: true,
+        },
+      });
 
-    let timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".work-section",
-        start: "top top",
-        end: () => `+=${getScrollAmount()}`, // Match 1:1 with horizontal move
-        scrub: 1,
-        pin: true,
-        id: "work",
-        invalidateOnRefresh: true,
-      },
+      timeline.to(".work-flex", {
+        x: () => -getScrollAmount(),
+        ease: "none",
+      });
+
+      // Refresh after a short delay to ensure layout is settled
+      const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 500);
+
+      return () => {
+        clearTimeout(timer);
+        timeline.kill();
+        ScrollTrigger.getById("work")?.kill();
+      };
     });
 
-    timeline.to(".work-flex", {
-      x: () => -getScrollAmount(),
-      ease: "none",
+    // Mobile fallback where we just let it scroll natively (handled via CSS changes)
+    mm.add("(max-width: 1024px)", () => {
+      // Just clear out any ScrollTrigger pins for this section
+      ScrollTrigger.getById("work")?.kill();
     });
-
-    // Refresh after a short delay to ensure layout is settled
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 500);
 
     return () => {
-      clearTimeout(timer);
-      timeline.kill();
-      ScrollTrigger.getById("work")?.kill();
+      mm.revert();
     };
   }, []);
   return (
